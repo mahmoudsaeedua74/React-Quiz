@@ -1,5 +1,4 @@
 import { createContext, useContext, useReducer, ReactNode } from "react";
-
 const queizContext = createContext<{
   status: State["status"];
   userAnswers: State["userAnswers"];
@@ -18,13 +17,16 @@ const questionSecond: number = 30;
 //make initail state and i will over right on it
 type Question = {
   text: string;
+  correct_answer: string;
+  incorrect_answers: string[];
+  question:[]
 };
 
 type State = {
   questions: Question[];
   status: "isLoading" | "ready" | "theStart" | "error" | "finshed" | "active";
   length: number;
-  secondTike: number | null;
+  secondTike: number ;
   amount: number;
   difficulty: string;
   userAnswers: boolean[];
@@ -50,7 +52,7 @@ const initialState: State = {
   status: "theStart",
   length: 0,
   answer: null,
-  secondTike: null,
+  secondTike: 0,
   amount: 0,
   userAnswers: [],
   difficulty: "easy",
@@ -109,7 +111,9 @@ function reducer(state: State, action: Action): State {
     //i will rest data so i need initialState from start
     case "tick":
       //if case tick secondTike==secondTike but -1 and when it ==fished will back to finsh screan
+      
       return {
+        
         ...state,
         secondTike: state.secondTike - 1,
         status: state.secondTike === 0 ? "finshed" : state.status,
@@ -160,8 +164,9 @@ export default function ContextProvider({ children }: ContextProviderProps) {
   // The code maps over the answers converting each true answer to 1 and each false answer to 0,
   // then reduces the array to get the total score by summing up all the 1s.
   const totalScore = userAnswers
-    .map((answer) => (answer ? 1 : 0))
-    .reduce((acc, curr) => acc + curr, 0);
+  .map((answer) => (answer ? 1 : 0))
+  .reduce((acc: number, curr: number) => acc + curr, 0);
+
 
   return (
     <queizContext.Provider

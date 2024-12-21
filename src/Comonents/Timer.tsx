@@ -3,6 +3,9 @@ import { useQuiz } from "../ContextProvider/ContextProvider";
 
 export default function Timer() {
   const { secondTike, dispatch } = useQuiz();
+  if (secondTike !== null) {
+    console.log(secondTike);
+  }
   const mins = Math.floor(secondTike / 60);
   const seconds = secondTike % 60;
   useEffect(() => {
