@@ -143,20 +143,21 @@ export default function ContextProvider({ children }: ContextProviderProps) {
   async function getApi() {
     dispatch({ type: "isLoading" });
     try {
-      let response = await fetch(
+      const response = await fetch(
         `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}`
       );
-
+  
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      let finalResponse = await response.json();
+      const finalResponse = await response.json();
       dispatch({ type: "dataReceived", payload: finalResponse.results });
     } catch (error) {
+      console.error(error); // Optionally log the error to use the 'error' variable
       dispatch({ type: "dataFailed" });
     }
   }
-
+  
   //have all num of questions
   const numQuestions = questions.length;
   // Calculate the total score based on the userAnswers array where each answer is either true or false.
