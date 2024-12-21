@@ -1,6 +1,19 @@
 import { createContext, useContext, useReducer, ReactNode } from "react";
 
-const queizContext = createContext<null>(null);
+const queizContext = createContext<{
+  status: State["status"];
+  userAnswers: State["userAnswers"];
+  length: State["length"];
+  answer: State["answer"];
+  secondTike: State["secondTike"];
+  difficulty: State["difficulty"];
+  questions: State["questions"];
+  getApi: () => void;
+  amount: State["amount"];
+  dispatch: React.Dispatch<Action>;
+  numQuestions: number;
+  totalScore: number;
+} | null>(null);
 const questionSecond: number = 30;
 //make initail state and i will over right on it
 type Question = {
@@ -142,10 +155,10 @@ export default function ContextProvider({ children }: ContextProviderProps) {
 
   //have all num of questions
   const numQuestions = questions.length;
-// Calculate the total score based on the userAnswers array where each answer is either true or false.
-// The userAnswers array contains boolean values (true or false).
-// The code maps over the answers converting each true answer to 1 and each false answer to 0,
-// then reduces the array to get the total score by summing up all the 1s.
+  // Calculate the total score based on the userAnswers array where each answer is either true or false.
+  // The userAnswers array contains boolean values (true or false).
+  // The code maps over the answers converting each true answer to 1 and each false answer to 0,
+  // then reduces the array to get the total score by summing up all the 1s.
   const totalScore = userAnswers
     .map((answer) => (answer ? 1 : 0))
     .reduce((acc, curr) => acc + curr, 0);
@@ -173,7 +186,7 @@ export default function ContextProvider({ children }: ContextProviderProps) {
 }
 export function useQuiz() {
   const context = useContext(queizContext);
-  if (context === undefined)
+  if (!context)
     throw new Error("QuizContext was used outside of the QuizProvider");
   return context;
 }
