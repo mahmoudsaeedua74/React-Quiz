@@ -29,7 +29,7 @@ export default function Form() {
     initialValues: {
       category: "",
       difficulty: "easy",
-      amount: amount || 10, // Default to 10 if `amount` is not defined
+      amount: amount , // Default to 10 if `amount` is not defined
     },
     validate,
     onSubmit: () => {
