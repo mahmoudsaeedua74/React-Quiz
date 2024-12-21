@@ -3,7 +3,6 @@ export default function FinishScreen() {
   const { dispatch, totalScore, length } = useQuiz();
 //percentage for all score
   const percentage = (totalScore / (length + 1)) * 100;
-  console.log(percentage)
   let emoji;
   //to made a total scor for user
   if (percentage === 100) emoji = "🥇";
