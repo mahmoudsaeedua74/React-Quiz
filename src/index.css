@@ -1,4 +1,7 @@
 /* Base Styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 :root {
   --color-darkest: #343a40;
   --color-dark: #495057;

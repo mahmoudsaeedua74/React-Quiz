@@ -1,8 +1,25 @@
 {
-  "files": [],
+  "compilerOptions": {
+    "target": "es6", // تحديد إصدار JavaScript المطلوب
+    "module": "esnext", // تحديد نوع الوحدات (ES Modules)
+    "strict": true, // تفعيل الوضع الصارم للتحقق من الأخطاء
+    "jsx": "react", // إذا كنت تستخدم React
+    "esModuleInterop": true, // لتسهيل التعامل مع الوحدات CommonJS
+    "skipLibCheck": true, // لتجاوز فحص مكتبات طرف ثالث
+    "moduleResolution": "node", // لضبط كيفية استيراد الملفات
+    "resolveJsonModule": true // إذا كنت تستخدم ملفات JSON في المشروع
+  },
+  "files": [
+    "src/index.ts" // إذا كنت ترغب في تضمين ملفات معينة
+  ],
   "references": [
-    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.app.json" }, // إذا كنت تستخدم تكوينات أخرى مثل tsconfig.app.json
     { "path": "./tsconfig.node.json" }
   ],
-
+  "include": [
+    "src/**/*" // تضمين كافة الملفات داخل مجلد src
+  ],
+  "exclude": [
+    "node_modules" // استبعاد مجلد node_modules
+  ]
 }
